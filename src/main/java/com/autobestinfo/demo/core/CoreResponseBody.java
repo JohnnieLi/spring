@@ -12,6 +12,14 @@ public class CoreResponseBody<T>  {
 
     }
 
+    /**
+     * Create an responseBody used in ResponseEntity.
+     *
+     * @param success must not be {@literal null}.
+     * @param result response result.
+     * @param message response message.
+     * @param error Exception.
+     */
     public CoreResponseBody(Boolean success, T result, String message, Exception error) {
            this.success = success;
            this.result = result;
@@ -41,7 +49,6 @@ public class CoreResponseBody<T>  {
         this.result = result;
         return this;
     }
-
 
 
     public CoreResponseBody<T> setMessage(String message){

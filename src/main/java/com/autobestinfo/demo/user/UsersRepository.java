@@ -8,6 +8,7 @@ import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "users", path = "users")
 public interface  UsersRepository extends MongoRepository<User,String> {
+
     List<User> findByFirstName(@Param("name")String name);
 
 }
