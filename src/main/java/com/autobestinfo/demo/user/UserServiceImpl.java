@@ -6,16 +6,14 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class UserServiceImpl extends CoreRepositoryServiceImpl<UsersRepository, User> implements UserService {
+public class UserServiceImpl extends CoreRepositoryServiceImpl<UsersRepository, User, String> implements UserService {
 
 
 
     @Autowired
     public UserServiceImpl(UsersRepository usersRepository) {
-        this.repository = usersRepository;
+        super(usersRepository);
     }
-
-
 
 
 
