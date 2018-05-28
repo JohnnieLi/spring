@@ -1,4 +1,4 @@
-package com.autobestinfo.demo.user;
+package com.autobestinfo.dev.user;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,8 +8,29 @@ public class User {
     @Id
     private String _id;
 
+
+    private String password;
+    private String username;
     private String firstName;
     private String lastName;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
 
     public String get_Id(){
         return _id;

@@ -1,10 +1,8 @@
-package com.autobestinfo.demo;
+package com.autobestinfo.dev;
 
-import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.autobestinfo.demo.user.User;
-import com.autobestinfo.demo.user.UsersRepository;
+import com.autobestinfo.dev.user.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

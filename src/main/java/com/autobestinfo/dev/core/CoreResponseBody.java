@@ -1,4 +1,4 @@
-package com.autobestinfo.demo.core;
+package com.autobestinfo.dev.core;
 
 
 public class CoreResponseBody<T>  {

@@ -1,4 +1,4 @@
-package com.autobestinfo.demo.user;
+package com.autobestinfo.dev.user;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.query.Param;
@@ -9,6 +9,6 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "users", path = "users")
 public interface  UsersRepository extends MongoRepository<User,String> {
 
-    List<User> findByFirstName(@Param("name")String name);
+    User findByUsername(@Param("name")String name);
 
 }

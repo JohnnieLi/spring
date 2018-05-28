@@ -1,4 +1,4 @@
-package com.autobestinfo.demo;
+package com.autobestinfo.dev;
 
 public class Greeting {
 

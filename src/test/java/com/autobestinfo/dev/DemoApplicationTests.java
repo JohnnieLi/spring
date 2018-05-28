@@ -1,4 +1,4 @@
-package com.autobestinfo.demo;
+package com.autobestinfo.dev;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

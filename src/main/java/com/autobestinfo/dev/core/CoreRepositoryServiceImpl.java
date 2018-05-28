@@ -1,4 +1,4 @@
-package com.autobestinfo.demo.core;
+package com.autobestinfo.dev.core;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 import java.util.Optional;
