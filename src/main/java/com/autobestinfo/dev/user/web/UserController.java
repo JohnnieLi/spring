@@ -26,19 +26,17 @@ public class UserController {
     }
 
 
-    @PostMapping("login")
-    public ResponseEntity<CoreResponseBody> login() {
+    @GetMapping("add")
+    public ResponseEntity<CoreResponseBody> add() {
         try{
-            List<User> users = this.userService.findAll();
-            CoreResponseBody responseBody = new CoreResponseBody<List>(true, users, "has test users", null);
+            User userResult = this.userService.addTest();
+            CoreResponseBody responseBody = new CoreResponseBody<>(true, userResult, "add 1 user", null);
             return new ResponseEntity<>(responseBody,HttpStatus.OK);
         }catch (Exception err){
-            CoreResponseBody responseBody = new CoreResponseBody<List>(false, null,"has test error", err);
+            CoreResponseBody responseBody = new CoreResponseBody<User>(false, null,"has error", err);
             return new ResponseEntity<>(responseBody,HttpStatus.NOT_FOUND);
         }
     }
-
-
 
     @GetMapping("getAll")
     public ResponseEntity<CoreResponseBody> getAll() {

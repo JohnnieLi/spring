@@ -16,9 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-
 import static com.autobestinfo.dev.core.security.SecurityUtils.*;
 
+
+//UsernamePasswordAuthenticationFilter This filter by default responds to the URL /login.
+// Issue token based on login behavior
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
 
@@ -54,10 +56,13 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
         String token = Jwts.builder()
+                .claim("_id", ((User) auth.getPrincipal()).get_Id())
+                .claim("role", ((User) auth.getPrincipal()).getRole())
                 .setSubject(((User) auth.getPrincipal()).getUsername())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
                 .compact();
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+        chain.doFilter(req, res);
     }
 }

@@ -7,7 +7,7 @@ interface UserService {
     void login(User user);
 
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     void updateUser(User user);
 
 }

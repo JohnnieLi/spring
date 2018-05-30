@@ -12,9 +12,10 @@ public class SecurityUtils {
     public static final String HEADER_STRING = "Authorization";
     public static final String SIGN_UP_URL = "/users/sign-up";
 
-    public static String generateToken(String _id) {
+    public static String generateToken(String _id, String role) {
         return Jwts.builder()
-                .setSubject(_id)
+                .claim("_id", _id)
+                .claim("role", role)
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
                 .compact();

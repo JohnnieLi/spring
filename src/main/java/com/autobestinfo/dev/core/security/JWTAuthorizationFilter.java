@@ -17,6 +17,7 @@ import static com.autobestinfo.dev.core.security.SecurityUtils.HEADER_STRING;
 import static com.autobestinfo.dev.core.security.SecurityUtils.SECRET;
 import static com.autobestinfo.dev.core.security.SecurityUtils.TOKEN_PREFIX;
 
+//Authorization(validate) token
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
     public JWTAuthorizationFilter(AuthenticationManager authManager) {
@@ -44,14 +45,14 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             // parse the token.
-            String user = Jwts.parser()
+            String username = Jwts.parser()
                     .setSigningKey(SECRET.getBytes())
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();
 
-            if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+            if (username != null) {
+                return new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());
             }
             return null;
         }
