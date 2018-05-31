@@ -1,7 +1,10 @@
 package com.autobestinfo.dev.core.security;
 
+import com.autobestinfo.dev.core.CoreResponseBody;
 import com.autobestinfo.dev.user.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -14,15 +17,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import static com.autobestinfo.dev.core.security.SecurityUtils.*;
+import static java.util.Collections.emptyList;
 
 
 //UsernamePasswordAuthenticationFilter This filter by default responds to the URL /login.
 // Issue token based on login behavior
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
+
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
@@ -41,8 +47,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             creds.getUsername(),
-                            creds.getPassword(),
-                            new ArrayList<>())
+                            creds.getPassword(), //creds.getPassword(),
+                            emptyList())
             );
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -55,10 +61,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
+
+        org.springframework.security.core.userdetails.User prin  = (org.springframework.security.core.userdetails.User)auth.getPrincipal();
         String token = Jwts.builder()
-                .claim("_id", ((User) auth.getPrincipal()).get_Id())
-                .claim("role", ((User) auth.getPrincipal()).getRole())
-                .setSubject(((User) auth.getPrincipal()).getUsername())
+                .setSubject(prin.getUsername())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET.getBytes())
                 .compact();

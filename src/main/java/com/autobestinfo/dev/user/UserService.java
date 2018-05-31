@@ -6,6 +6,7 @@ interface UserService {
 
     void login(User user);
 
+    User findByUsername(String username);
 
     //@PreAuthorize("hasRole('ADMIN')")
     void updateUser(User user);
