@@ -1,6 +1,5 @@
 package com.autobestinfo.dev.core.security;
 
-import com.autobestinfo.dev.user.UserServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

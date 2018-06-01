@@ -2,6 +2,15 @@ package com.autobestinfo.dev.core;
 import java.util.List;
 import java.util.Optional;
 
+
+
+
+/**
+ * General repository service interface,
+ * provide findAll, findById, existsById, create, deleteById, deleteAll and update Db service
+ *
+ * @author Jiangqi Li
+ */
 public interface CoreRepositoryService<T, ID> {
 
     /**

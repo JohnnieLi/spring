@@ -1,26 +1,34 @@
 package com.autobestinfo.dev.core.security;
 
+import com.autobestinfo.dev.user.User;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import static com.autobestinfo.dev.core.security.SecurityUtils.HEADER_STRING;
 import static com.autobestinfo.dev.core.security.SecurityUtils.SECRET;
 import static com.autobestinfo.dev.core.security.SecurityUtils.TOKEN_PREFIX;
 
 //Authorization(validate) token
+/**
+ * JWT Authorization filter, used for validate token then set SecurityContextHolder
+ *
+ * @author Jiangqi Li
+ */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-    public JWTAuthorizationFilter(AuthenticationManager authManager) {
+
+    JWTAuthorizationFilter(AuthenticationManager authManager) {
         super(authManager);
     }
 
@@ -50,9 +58,13 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();
+            User applicationUser = UserDetailsServiceImpl.findUserByUsername(username);
 
-            if (username != null) {
-                return new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());
+            if (applicationUser != null) {
+                //Grant user authorities based on the application roles
+                String ROLE_ = "ROLE_";
+                List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ANONYMOUS","ROLE_USERS");
+                return new UsernamePasswordAuthenticationToken(applicationUser, null, authorities);
             }
             return null;
         }

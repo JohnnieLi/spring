@@ -3,7 +3,12 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * General repository service implement, need to be extended by all custom repository services
+ * provide findAll, findById, existsById, create, deleteById, deleteAll and update Db service functions
+ *
+ * @author Jiangqi Li
+ */
 public class CoreRepositoryServiceImpl<Rep extends MongoRepository<T, ID>, T, ID> implements CoreRepositoryService<T, ID> {
 
 

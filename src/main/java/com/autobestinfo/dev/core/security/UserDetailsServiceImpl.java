@@ -1,23 +1,47 @@
 package com.autobestinfo.dev.core.security;
-
 import com.autobestinfo.dev.user.User;
 import com.autobestinfo.dev.user.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
-import static java.util.Collections.emptyList;
 
+/**
+ * Implement UserDetailsService and provide loadUser functions for AuthenticationFilters
+ *
+ * @author Jiangqi Li
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UsersRepository usersRepository;
+    private static UsersRepository usersRepository;
 
     @Autowired
     public UserDetailsServiceImpl(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
+    }
+
+
+    /**
+     * Get User object from DAO
+     * <p>
+     * This might be used for AuthenticationFilter to set User Principal object
+     * </p>
+     * @param username String
+     * @return User
+     * @throws UsernameNotFoundException
+     */
+     static User findUserByUsername(String username) throws UsernameNotFoundException {
+        User applicationUser = usersRepository.findByUsername(username);
+        if (applicationUser == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        return applicationUser;
     }
 
     @Override
@@ -26,7 +50,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (applicationUser == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new org.springframework.security.core.userdetails.User(applicationUser.getUsername(), applicationUser.getPassword(), emptyList());
+        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ANONYMOUS");
+        return new org.springframework.security.core.userdetails.User(applicationUser.getUsername(), applicationUser.getPassword(), authorities);
     }
 
 }

@@ -1,6 +1,11 @@
 package com.autobestinfo.dev.core;
 
-
+/**
+ * Core http request response format
+ * {success:  ,result:   , error:   , message:  }
+ *
+ * @author Jiangqi Li
+ */
 public class CoreResponseBody<T>  {
 
     private T  result;

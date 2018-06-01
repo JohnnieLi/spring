@@ -6,6 +6,8 @@ import com.autobestinfo.dev.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,8 +42,12 @@ public class UserController {
     }
 
     @GetMapping("getAll")
-    public ResponseEntity<CoreResponseBody> getAll() {
+//  @PreAuthorize("isAuthenticated()")
+//  @PreAuthorize("hasAuthority('hasAuthorityANONYMOUS')")   //if using hasAuthority, then don't need Prefix "ROLE_" setting
+    @PreAuthorize("hasRole('ROLE_USERS')")  //if using hasAuthority, then  need Prefix "ROLE_" setting
+    public ResponseEntity<CoreResponseBody> getAll(Authentication auth) {
         try{
+            User applicationUser  = (User)auth.getPrincipal();
             List<User> users = this.userService.findAll();
             CoreResponseBody responseBody = new CoreResponseBody<List>(true, users, "has 1 users", null);
             return new ResponseEntity<>(responseBody,HttpStatus.OK);
