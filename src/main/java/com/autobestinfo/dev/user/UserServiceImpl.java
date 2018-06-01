@@ -2,8 +2,12 @@ package com.autobestinfo.dev.user;
 
 import com.autobestinfo.dev.core.CoreRepositoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -36,6 +40,16 @@ public class UserServiceImpl extends CoreRepositoryServiceImpl<UsersRepository, 
     @Override
     public User findByUsername(String username) {
         return this.repository.findByUsername(username);
+    }
+
+    @Override
+    public User findByGoogle(String username) {
+        return this.repository.findByUsernameGoogle(username);
+    }
+
+    @Override
+    public User findByFacebook(String username) {
+        return this.repository.findByUsernameFacebook(username);
     }
 
     @Override

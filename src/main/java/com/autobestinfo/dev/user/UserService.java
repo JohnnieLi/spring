@@ -8,7 +8,10 @@ interface UserService {
 
     User findByUsername(String username);
 
-    //@PreAuthorize("hasRole('ADMIN')")
+    User findByGoogle(String username);
+
+    User findByFacebook(String username);
+
     void updateUser(User user);
 
 }
