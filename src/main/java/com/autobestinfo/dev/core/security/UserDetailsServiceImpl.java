@@ -50,7 +50,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (applicationUser == null) {
             throw new UsernameNotFoundException(username);
         }
-        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ANONYMOUS");
+        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USERS");
         return new org.springframework.security.core.userdetails.User(applicationUser.getUsername(), applicationUser.getPassword(), authorities);
     }
 

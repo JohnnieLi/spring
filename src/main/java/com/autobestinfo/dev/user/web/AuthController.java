@@ -5,8 +5,6 @@ import com.autobestinfo.dev.core.security.SecurityUtils;
 import com.autobestinfo.dev.user.User;
 import com.autobestinfo.dev.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -21,7 +19,7 @@ import static com.autobestinfo.dev.core.security.SecurityUtils.TOKEN_PREFIX;
 @RequestMapping("auth/")
 public class AuthController {
 
-    //Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1Mjc3NzMwMTQsImV4cCI6MTU1OTMwOTAzMywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoidGVzdGVyIiwiX2lkIjoiNWIwZmYzOTIyMTdhZDQyN2UwZjgwOTY5IiwiUm9sZSI6IkFETUlOIn0.PGFnOncrTpbPl6sFtBHbDT6apUlJH_Ew9wIgVNQGIHoBXqysOQNg1Xg7xy7S9wnaCCmIzeyVbVqpo2fjIg32AA
+    //Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0ZXIyIiwiZXhwIjoxNTI4OTg0NTc1fQ.fRgjcr803EPjgokkDvlParNu3nWvev37DB2zY1FT9ZznHUxOECRd7LiGtjIUFkQbNcklp9dgcqdmWP9pcl4XBw
 
     private final UserServiceImpl userService;
 

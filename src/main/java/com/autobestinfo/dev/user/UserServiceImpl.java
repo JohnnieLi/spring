@@ -52,10 +52,7 @@ public class UserServiceImpl extends CoreRepositoryServiceImpl<UsersRepository, 
         return this.repository.findByUsernameFacebook(username);
     }
 
-    @Override
-    public void updateUser(User user) {
 
-    }
 
 
 }

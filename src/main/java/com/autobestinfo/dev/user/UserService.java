@@ -12,6 +12,5 @@ interface UserService {
 
     User findByFacebook(String username);
 
-    void updateUser(User user);
 
 }

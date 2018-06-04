@@ -1,9 +1,11 @@
 package com.autobestinfo.dev.user;
 
+import com.autobestinfo.dev.membership.Membership;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="users")
+@Document(collection = "users")
 public class User {
     @Id
     private String _id;
@@ -12,6 +14,8 @@ public class User {
     private String password;
     private String username;
     private String role;
+    @DBRef
+    private Membership membership;
 
     public String get_id() {
         return _id;
@@ -48,26 +52,33 @@ public class User {
         this.password = password;
     }
 
-
-
-    public String get_Id(){
+    public String get_Id() {
         return _id;
     }
 
-    public String getFirstName(){
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName){
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
 
-    public String getLastName(){
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName){
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public Membership getMembership() {
+        return membership;
+    }
+
+    public void setMembership(Membership membership) {
+        this.membership = membership;
+    }
+
 }

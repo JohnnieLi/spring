@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+//https://github.com/socketio/socket.io-client-java
 @SpringBootApplication
 public class DemoApplication {
 
@@ -24,9 +25,7 @@ public class DemoApplication {
 	CommandLineRunner init(UsersRepository users ) {
 
 		return args -> {
-//			User user = new User();
-//			user.setFirstName("Jon");
-//			users.insert(user);
+
 		};
 
 	}
